@@ -1,15 +1,40 @@
 import Botao from "../button";
 import Relogio from "./relogio";
 import style from './Cronometro.module.scss';
+import { tempoParaSegundos } from "../../common/utils/time";
+import { ITarefa } from "../../types/tarefa";
+import { useEffect, useState } from "react";
 
-export default function Cronometro() {
+interface Props {
+    selecionado: ITarefa | undefined
+}
+
+export default function Cronometro({ selecionado }: Props) {
+    const [tempo, setTempo] = useState<number>();
+
+    useEffect(() => {
+        if(selecionado?.tempo){
+            setTempo(tempoParaSegundos(selecionado.tempo));
+        }
+    },[selecionado]) 
+
+    function contagemRegressiva(contador: number = 0){
+        setTimeout(() => {
+            if(contador > 0){
+                setTempo(contador - 1);
+                return contagemRegressiva(contador - 1);
+            }
+            
+        }, 1000);
+    }
+
     return (
         <div className={style.cronometro}>
             <p className={style.titulo}>Escolha um card e inicie o cronometro</p>
         <div className={style.relogioWrapper}>
-            <Relogio />
+            <Relogio tempo={tempo} />
         </div>
-            <Botao>
+            <Botao onClick={() => contagemRegressiva(tempo)}>
                 Começar!  
             </Botao>    
         </div>

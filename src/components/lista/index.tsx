@@ -15,7 +15,7 @@ function Lista({ tarefas, selecionaTarefa }: Props) {
             {tarefas.map(item => (
                 <Item
                     selecionaTarefa={selecionaTarefa}
-                    //key={index}
+                    key={item.id}
                     {...item}
                 />
                 ))}   
