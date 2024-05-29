@@ -19,13 +19,15 @@
       }
   
       input {
+        flex-grow: 1;
         width: 100%;
         padding: 8px 12px 4px;
         box-sizing: border-box;
         border: unset;
-        border-radius: 5px;
+        border-radius: 7px;
         background-color: #5D677C;
         box-shadow: 0px 2px 4px #2D2B2B9F inset;
+        color: white;
         
         &::placeholder {
           color: #BFBFBF;
